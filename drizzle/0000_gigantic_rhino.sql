@@ -1,4 +1,7 @@
-CREATE TYPE "public"."match_status" AS ENUM('scheduled', 'live', 'finished');--> statement-breakpoint
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+--> statement-breakpoint
+CREATE TYPE "public"."match_status" AS ENUM('scheduled', 'live', 'finished');
+--> statement-breakpoint
 CREATE TABLE "commentary" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"match_id" uuid NOT NULL,

@@ -1,0 +1,2 @@
+CREATE INDEX "commentary_match_id_idx" ON "commentary" USING btree ("match_id");--> statement-breakpoint
+ALTER TABLE "commentary" ADD CONSTRAINT "commentary_match_sequence_unique" UNIQUE("match_id","sequence");
