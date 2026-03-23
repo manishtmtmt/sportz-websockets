@@ -33,9 +33,9 @@ matchRouter.get("/", async (req, res) => {
 
     return res.status(200).json({ data });
   } catch (error) {
+    console.error("Failed to fetch matches:", error);
     return res.status(500).json({
       error: "Failed to fetch matches",
-      details: JSON.stringify(error),
     });
   }
 });
@@ -46,7 +46,7 @@ matchRouter.post("/", async (req, res) => {
   if (!parsed.success) {
     return res
       .status(400)
-      .json({ error: "Invalid paylod", details: JSON.stringify(parsed.error) });
+      .json({ error: "Invalid payload", details: JSON.stringify(parsed.error) });
   }
 
   const {
@@ -68,9 +68,9 @@ matchRouter.post("/", async (req, res) => {
 
     res.status(201).json({ data: event });
   } catch (error) {
+    console.error("Failed to create match:", error);
     return res.status(500).json({
       error: "Failed to create match",
-      details: JSON.stringify(error),
     });
   }
 });

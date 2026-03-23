@@ -2,10 +2,10 @@ import { z } from "zod";
 
 // Helper function for ISO date string validation
 export const isoDateString = (fieldName = "Date") => {
-  return z.string().refine((val) => {
-    const date = new Date(val);
-    return !isNaN(date.getTime()) && val === date.toISOString();
-  }, `${fieldName} must be a valid ISO date string`);
+  return z.string().datetime({
+    message: `${fieldName} must be a valid ISO-8601 datetime`,
+    offset: true,
+  });
 };
 
 // Match status constants
@@ -22,7 +22,7 @@ export const listMatchesQuerySchema = z.object({
 
 // Schema for validating match ID parameter
 export const matchIdParamSchema = z.object({
-  id: z.coerce.number().int().positive(),
+  id: z.uuid(),
 });
 
 // Schema for creating a new match
