@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import { matchRouter } from "./routes/matches.js";
 import { attachWebSocketServer } from "./ws/server.js";
+import { commentaryRouter } from "./routes/commentary.js";
 
 const parsedPort = Number.parseInt(process.env.PORT || "8000", 10);
 const PORT =
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/matches", matchRouter);
+app.use("/api/v1/matches/:id/commentary", commentaryRouter);
 
 const { broadcastMatchCreated } = attachWebSocketServer(server);
 app.locals.broadcastMatchCreated = broadcastMatchCreated;
